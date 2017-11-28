@@ -1,8 +1,10 @@
-FROM registry.access.redhat.com/rhel7/rhel
-RUN yum groupinstall "Development Tools"
-RUN yum groupinstall "Development Libraries"
-COPY . /usr/src/myapp
+FROM fedora:latest
+ENV START_FILE="install.sh"
 WORKDIR /usr/src/myapp
-RUN gcc -o myapp main.c
-CMD ["./myapp"]
-RUN cat /etc/redhat-release
+COPY . /usr/src/myapp
+COPY $START_FILE $WORKDIR
+
+RUN chmod ug+x /usr/src/myapp/install.sh && \
+    sync
+RUN /usr/src/myapp/install.sh
+RUN cat /etc/issue

@@ -1,14 +1,13 @@
-CC      = gcc
-CFLAGS  = -g
-RM      = rm -f
+CC	=	g++
+CFLAGS	=	-g
+RM	=	rm	-f
 
+default:all
 
-default: all
+all:Hello
 
-all: Hello
+Hello:main.c
+	$(CC)	$(CFLAGS)	-o	myapp	main.c
 
-Hello: main.c
-    $(CC) $(CFLAGS) -o Hello main.c
-
-clean veryclean:
-    $(RM) Hello
+clean	veryclean:
+	$(RM)	Hello
